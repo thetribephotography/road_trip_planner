@@ -24,7 +24,7 @@ class TripController extends Controller
         $trip = Trip::where('user_id', Auth::user()->id)->find($id);
 
         if($trip){
-            $destinations = Destination::where('trip_id', $trip->id)->orderBy('created_at', 'desc')
+            $destinations = Destination::where('trips_id', $trip->id)->orderBy('created_at', 'desc')
                 ->where('name', 'like', '%' . request('q') . '%')
                 ->paginate(25);
 
