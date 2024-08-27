@@ -1,4 +1,4 @@
-# Road Trip Planner App
+# Road Trip Planner
 This project is a simple road trip planner application built with PHP, MySQL, Leaflet, and OpenStreetMap. It allows users to create a list of destinations, reorder them, and visualize the route on a map.
 
 **Prerequisites:**
