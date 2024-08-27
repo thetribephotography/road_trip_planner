@@ -6,7 +6,7 @@ export default defineConfig({
         laravel({
             input: ["resources/css/app.css", "resources/js2/app.js"],
             refresh: true,
-            detectTls: road-trip-planner.fly.dev,
+            detectTls: "road-trip-planner.fly.dev",
         }),
     ],
 });
