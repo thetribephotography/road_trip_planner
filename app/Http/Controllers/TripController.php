@@ -14,7 +14,8 @@ class TripController extends Controller
     public function index()
     {
         $user = Auth::user();
-        $trips = Trip::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
+        $trips = Trip::where('user_id', $user->id)->orderBy('created_at', 'desc')->where('name', 'like', '%' . request('q') . '%')
+            ->paginate(25);;
 
         return view('trips.index', compact('trips'));
     }
