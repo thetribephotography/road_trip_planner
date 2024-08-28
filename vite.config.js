@@ -7,9 +7,9 @@ export default defineConfig({
             input: [
                 "resources/css/app.css",
                 "resources/js2/app.js",
-                "public/css/app.css",
-                "public/js/app.js",
-                "public/img/MapData.png",
+                // "public/css/app.css",
+                // "public/js/app.js",
+                // "public/img/MapData.png",
                 // "public/svg/*.svg",
             ],
             refresh: true,
