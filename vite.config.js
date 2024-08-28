@@ -10,7 +10,7 @@ export default defineConfig({
                 "public/css/app.css",
                 "public/js/app.js",
                 "public/img/MapData.png",
-                "public/svg/*.svg",
+                // "public/svg/*.svg",
             ],
             refresh: true,
             detectTls: "road-trip-planner.fly.dev",
