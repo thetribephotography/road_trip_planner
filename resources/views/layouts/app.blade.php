@@ -100,7 +100,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-white" href="{{ route('destinations.index') }}">{{ __('destination.list') }}</a>
+                                <a class="nav-link text-white" href="{{ route('trips.index') }}">{{ __('Trips List') }}</a>
                             </li>
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link text-white dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

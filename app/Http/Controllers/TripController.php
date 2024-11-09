@@ -9,15 +9,15 @@ use Illuminate\Support\Facades\Auth;
 
 class TripController extends Controller
 {
-    //
+    //make it that a trip bascially contains destinations which are stored in the destinations table and the trip table stores the trip name, destinations for a particular trip can be rearranged and the distance can there been calculated for that trip.
 
     public function index()
     {
         $user = Auth::user();
         $trips = Trip::where('user_id', $user->id)->orderBy('created_at', 'desc')->where('name', 'like', '%' . request('q') . '%')
-            ->paginate(25);;
+            ->paginate(25);
 
-        return view('trips.index', compact('trips'));
+        return view('trips.index', compact('trips', 'user'));
     }
 
     public function show($id)
@@ -25,18 +25,19 @@ class TripController extends Controller
         $trip = Trip::where('user_id', Auth::user()->id)->find($id);
 
         if($trip){
-            $destinations = Destination::where('trips_id', $trip->id)->orderBy('created_at', 'desc')
-                ->where('name', 'like', '%' . request('q') . '%')
-                ->paginate(25);
+            $destinations = Destination::where('trip_id', $trip->id)->orderBy('created_at', 'desc')
+                // ->where('name', 'like', '%' . request('q') . '%')
+                ->get();
 
-            return view('destinations.index', compact('destinations', $trip));
+            // return view('destinations.index', compact('destinations', 'trip'));
+            return view('destinations.map', compact('destinations', 'trip'));
         } else{
             return redirect()->route('trips.index');
         }
     }
 
 
-    public function storeTrip(Request $request)
+    public function store(Request $request)
     {
         try{
             $user = Auth::user();
@@ -58,7 +59,7 @@ class TripController extends Controller
         }
     }
 
-    public function createTrip()
+    public function create()
     {
         return view('trips.create');
     }

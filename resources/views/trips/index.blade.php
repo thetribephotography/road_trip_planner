@@ -4,48 +4,45 @@
 
 @section('content')
 <div class="mb-3">
-    {{-- <div class="float-right">
-        @can('create', new App\Models\Destination)
-            <a href="{{ route('destinations.create') }}" class="btn btn-success">{{ __('destination.create') }}</a>
-        @endcan
-    </div> --}}
-    <h1 class="page-title">{{ __('Trips.list') }} <small>{{ __('app.total') }} : {{ $trips->total() }}</small></h1>
+    <h1 class="page-title">{{ __('Trips List') }} <small>{{ __('app.total') }} : {{ $trips->total() }}</small></h1>
+
 </div>
 
 <div class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="card-header">
+                 <div class="float-right">
+        {{-- @can('create', new App\Models\Trip) --}}
+            <a href="{{ route('trips.create') }}" class="btn btn-success">{{ __('Create New Trip') }}</a>
+            {{-- <p>jdj</p> --}}
+        {{-- @endcan --}}
+    </div>
                 <form method="GET" action="" accept-charset="UTF-8" class="form-inline">
                     <div class="form-group">
-                        <label for="q" class="control-label">{{ __('trips.search') }}</label>
+                        <label for="q" class="control-label">{{ __('Trips Search') }}</label>
                         <input placeholder="{{ __('trips.search_text') }}" name="q" type="text" id="q" class="form-control mx-sm-2" value="{{ request('q') }}">
                     </div>
-                    <input type="submit" value="{{ __('destination.search') }}" class="btn btn-secondary">
-                    <a href="{{ route('destinations.index') }}" class="btn btn-link">{{ __('app.reset') }}</a>
+                    <input type="submit" value="{{ __('trips.search') }}" class="btn btn-secondary">
+                    <a href="{{ route('trips.index') }}" class="btn btn-link">{{ __('app.reset') }}</a>
                 </form>
             </div>
             <table class="table table-sm table-responsive-sm">
                 <thead>
                     <tr>
                         <th class="text-center">{{ __('app.table_no') }}</th>
-                        <th>{{ __('trips.name') }}</th>
-                        {{-- <th>{{ __('destination.address') }}</th>
-                        <th>{{ __('destination.latitude') }}</th>
-                        <th>{{ __('destination.longitude') }}</th> --}}
+                        <th>{{ __('Trips') }}</th>
                         <th class="text-center">{{ __('app.action') }}</th>
                     </tr>
                 </thead>
                 <tbody id="destination-table-body">
                     @forelse($trips as $key => $trip)
                     <tr data-trip-id="{{ $trip->id }}">
-                        <td class="text-center">{{ $trip->firstItem() + $key }}</td>
+                        <td class="text-center">{!! $trip->id !!}</td>
                         <td>{!! $trip->name !!}</td>
-                        {{-- <td>{{ $destination->address }}</td>
-                        <td>{{ $destination->latitude }}</td>
-                        <td>{{ $destination->longitude }}</td> --}}
                         <td class="text-center">
-                            <a href="{{ route('destinations.show', $trip) }}" id="show-destination-{{ $trip->id }}">{{ __('app.show') }}</a>
+                            <a href="{{ route('trips.show', $trip) }}" id="show-destination-{{ $trip->id }}">{{ __('app.show') }}</a>
+                            {{-- <a class="nav-link text-white" href="{{ route('destination_map.index') }}">{{ __('menu.map') }}</a> --}}
                         </td>
                     </tr>
                     @empty

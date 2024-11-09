@@ -20,7 +20,7 @@ class Destination extends Model
         'latitude',
         'longitude',
         'creator_id',
-        'trips_id',
+        'trip_id',
     ];
 
     /**

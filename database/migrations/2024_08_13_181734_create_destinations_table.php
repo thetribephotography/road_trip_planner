@@ -20,9 +20,9 @@ return new class extends Migration
             $table->string('longitude', 15)->nullable();
             $table->integer('order')->default(0);
             $table->timestamps();
-
+            //
             $table->foreignId('creator_id')->constrained('users')->onDelete('restrict');
-            $table->foreignIdFor(Trip::class)->constrained();
+            $table->foreignIdFor(Trip::class)->nullable()->constrained();
         });
     }
 

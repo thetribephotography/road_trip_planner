@@ -105,7 +105,7 @@
                     </h4>
 
                     <p class="text-center">
-                        <a href="{{ route('destinations.create') }}" class="text-center mt-2 btn btn-info">Create a destination</a>
+                        <a href="{{ route('trips.create') }}" class="text-center mt-2 btn btn-info">Create a Trip</a>
                     </p>
                 </div>
             </div>

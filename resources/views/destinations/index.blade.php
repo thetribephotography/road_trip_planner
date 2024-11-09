@@ -1,15 +1,16 @@
 @extends('layouts.app')
 
-@section('title', __('destination.list'))
+@section('title', __($trip->name . 'Trip.destination.list'))
 
 @section('content')
 <div class="mb-3">
     <div class="float-right">
         @can('create', new App\Models\Destination)
-            <a href="{{ route('destinations.create') }}" class="btn btn-success">{{ __('destination.create') }}</a>
+        {{-- dd({{$trip->id}}); --}}
+            <a href="{{ route('destinations.create', ['trip_id' => $trip->id] ) }}" class="btn btn-success">{{ __('destination.create') }}</a>
         @endcan
     </div>
-    <h1 class="page-title">{{ __('destination.list') }} <small>{{ __('app.total') }} : {{ $destinations->total() }}</small></h1>
+    <h1 class="page-title">{{ __($trip->name . ' Destination List') }} <small>{{ __('app.total') }} : {{ $destinations->total() }}</small></h1>
 </div>
 
 <div class="row">
@@ -22,7 +23,7 @@
                         <input placeholder="{{ __('destination.search_text') }}" name="q" type="text" id="q" class="form-control mx-sm-2" value="{{ request('q') }}">
                     </div>
                     <input type="submit" value="{{ __('destination.search') }}" class="btn btn-secondary">
-                    <a href="{{ route('destinations.index') }}" class="btn btn-link">{{ __('app.reset') }}</a>
+                    <a href="{{ route('destinations.index', ['trip_id' => $trip->id] ) }}" class="btn btn-link">{{ __('app.reset') }}</a>
                 </form>
             </div>
             <table class="table table-sm table-responsive-sm">

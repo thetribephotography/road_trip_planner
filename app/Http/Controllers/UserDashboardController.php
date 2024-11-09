@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Destination;
+use App\Models\Trip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,9 @@ class UserDashboardController extends Controller
      */
     public function index()
     {
-        $user = Auth::user(); 
+        $user = Auth::user();
+        $trips = Trip::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
+
         $destinations = Destination::where('creator_id', $user->id)->orderBy('created_at', 'desc')->get();
         $hasMultipleDestinations = $destinations->count() > 1;
         $summary = $hasMultipleDestinations ? $this->calculateSummary($destinations) : null;
@@ -23,7 +26,7 @@ class UserDashboardController extends Controller
         // Get the last destination
         $lastDestination = $destinations->first();
 
-        return view('dashboard', compact('hasMultipleDestinations', 'summary', 'lastDestination'));
+        return view('dashboard', compact('hasMultipleDestinations', 'summary', 'lastDestination', 'trips'));
     }
 
     /**
