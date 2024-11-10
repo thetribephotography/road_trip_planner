@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import laravel from 'laravel-vite-plugin';
+// import "leaflet-routing-machine";
 
 export default defineConfig({
     plugins: [
@@ -13,7 +14,7 @@ export default defineConfig({
                 // "public/svg/*.svg",
             ],
             refresh: true,
-            detectTls: "road-trip-planner.fly.dev",
+            // detectTls: "road-trip-planner.fly.dev",
         }),
     ],
 });

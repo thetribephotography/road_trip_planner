@@ -19,16 +19,21 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // Destination Routes
+    Route::get('/destinations/create/{trip_id}', [DestinationController::class, 'create'])->name('destinations.create');
     Route::resource('destinations', DestinationController::class);
+
     Route::post('/destinations/order', [DestinationController::class, 'updateOrder'])->name('destinations.updateOrder');
     Route::get('/destination-map', [DestinationMapController::class, 'index'])->name('destination_map.index');
+    
+    // Route::post('/destinations/store', [DestinationController::class, 'store'])->name('destinations.store');
 
 
     //TRIPS
+    Route::resource('trips', TripController::class);
     Route::get('/trips', [TripController::class, 'index'])->name('trips.index');
-    Route::get('/trips/{id}', [TripController::class, 'show'])->name('trips.show');
-    Route::post('/trips/store', [TripController::class, 'storeTrip'])->name('trips.store');
-    Route::get('/trips/create', [TripController::class, 'create'])->name('trips.create');
+    // Route::get('/trips/{id}', [TripController::class, 'show'])->name('trips.show');
+    // Route::post('/trips/store', [TripController::class, 'storeTrip'])->name('trips.store');
+    // Route::get('/trips/create', [TripController::class, 'create'])->name('trips.create');
 
 });
 

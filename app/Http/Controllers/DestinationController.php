@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Destination;
+use App\Models\Trip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -20,12 +21,19 @@ class DestinationController extends Controller
     {
         // $this->authorize('manage_destination');
 
-        $destinations = Destination::where('creator_id', Auth::id())
-            ->orderBy('created_at', 'desc')
-            ->where('name', 'like', '%' . request('q') . '%')
-            ->paginate(25);
+        $trip = Trip::find(request('trip_id'));
 
-        return view('destinations.index', compact('destinations'));
+        if($trip){
+            $destinations = Destination::where('creator_id', Auth::id())
+                ->orderBy('created_at', 'desc')
+                ->where('name', 'like', '%' . request('q') . '%')
+                ->where('trip_id', $trip->id)
+                ->paginate(25);
+
+            return view('destinations.index', compact('destinations', 'trip'));
+        }else{
+            return redirect()->route('trips.index');
+        }
     }
 
 
@@ -38,7 +46,11 @@ class DestinationController extends Controller
     {
         $this->authorize('create', new Destination);
 
-        return view('destinations.create');
+        $trip_id = request()->query('trip_id');
+
+        // dd($trip_id);
+
+        return view('destinations.create', compact('trip_id'));
     }
 
     /**
@@ -49,6 +61,7 @@ class DestinationController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         $this->authorize('create', new Destination);
 
         $newDestination = $request->validate([
@@ -56,12 +69,14 @@ class DestinationController extends Controller
             'address'   => 'nullable|max:255',
             'latitude'  => 'nullable|required_with:longitude|max:15',
             'longitude' => 'nullable|required_with:latitude|max:15',
-            'trips_id' => 'required|exists:trips,id',
+            'trip_id' => 'required|exists:trips,id',
         ]);
 
         $newDestination['creator_id'] = Auth::id();
 
-        $destination = Destination::updateOrCreate(['trips_id' => $newDestination['trips_id'], 'name' => $newDestination['name']],$newDestination);
+        // $destination = Destination::updateOrCreate(['trips_id' => $newDestination['trips_id'], 'name' => $newDestination['name']],$newDestination);
+
+        $destination = Destination::create($newDestination);
 
         return redirect()->route('destinations.show', $destination);
     }
@@ -79,8 +94,9 @@ class DestinationController extends Controller
     $userDestinations = Destination::where('creator_id', Auth::id())->get();
     $hasMultipleDestinations = $userDestinations->count() > 1;
     $summary = $hasMultipleDestinations ? $this->calculateSummary($userDestinations) : null;
+    $trip = Trip::find($destination->trip_id);
 
-    return view('destinations.show', compact('destination', 'userDestinations', 'summary', 'hasMultipleDestinations'));
+    return view('destinations.show', compact('destination', 'userDestinations', 'summary', 'hasMultipleDestinations', 'trip'));
 }
 
     /**

@@ -1,27 +1,27 @@
 @extends('layouts.app')
 
-@section('title', __('destination.create'))
+@section('title', __('trips.create'))
 
 @section('content')
 <div class="row justify-content-center">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header">{{ __('destination.create') }}</div>
-            <form method="POST" action="{{ route('destinations.store') }}" accept-charset="UTF-8">
+            <div class="card-header">{{ __('Create Your Trip') }}</div>
+            <form method="POST" action="{{ route('trips.store') }}" accept-charset="UTF-8">
                 {{ csrf_field() }}
                 <div class="card-body">
                     <div class="form-group">
-                        <label for="name" class="control-label">{{ __('destination.name') }}</label>
+                        <label for="name" class="control-label">{{ __('Name your Trip') }}</label>
                         <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required>
                         {!! $errors->first('name', '<span class="invalid-feedback" role="alert">:message</span>') !!}
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                         <label for="address" class="control-label">{{ __('destination.address') }}</label>
                         <textarea id="address" class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}" name="address" rows="4">{{ old('address') }}</textarea>
                         {!! $errors->first('address', '<span class="invalid-feedback" role="alert">:message</span>') !!}
-                    </div>
-                    <p class="text-center text-success">Use the map to set longitude and latitude by clicking on your area</p>
-                    <div class="row">
+                    </div> --}}
+                    {{-- <p class="text-center text-success">Use the map to set longitude and latitude by clicking on your area</p> --}}
+                    {{-- <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="latitude" class="control-label">{{ __('destination.latitude') }}</label>
@@ -36,20 +36,12 @@
                                 {!! $errors->first('longitude', '<span class="invalid-feedback" role="alert">:message</span>') !!}
                             </div>
                         </div>
-
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                {{-- <label for="longitude" class="control-label">{{ __('') }}</label> --}}
-                                <input id="trip_id" type="text" class="form-control{{ $errors->has('trip_id') ? ' is-invalid' : '' }}" name="trip_id" value="{{ old('trip_id', $trip_id) }}" required hidden>
-                                {!! $errors->first('trip_id', '<span class="invalid-feedback" role="alert">:message</span>') !!}
-                            </div>
-                        </div>
-                    </div>
-                    <div id="mapid"></div>
+                    </div> --}}
+                    {{-- <div id="mapid"></div> --}}
                 </div>
                 <div class="card-footer">
-                    <input type="submit" value="{{ __('destination.create') }}" class="btn btn-success">
-                    <a href="{{ route('destinations.index') }}" class="btn btn-link">{{ __('app.cancel') }}</a>
+                    <input type="submit" value="{{ __('Create Trip') }}" class="btn btn-success">
+                    <a href="{{ route('trips.index') }}" class="btn btn-link">{{ __('app.cancel') }}</a>
                 </div>
             </form>
         </div>
