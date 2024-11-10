@@ -81,4 +81,4 @@ Open your web browser and navigate to `http://127.0.0.1:8000` or the address of 
 - User trip data stores in the browser's local storage.
 - Responsive design: The application is designed to be responsive and work on different screen sizes.
 
-### Thank you. 
+### Thank you
